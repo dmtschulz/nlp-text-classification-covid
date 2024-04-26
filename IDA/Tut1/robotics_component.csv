@@ -1,0 +1,11 @@
+,Component ID,Test Date,Material Type,Stress Test Score,Durability Rating (Pass/Fail),Warranty Period (Days),Usage Category
+0,101,2023-10-01,Aluminum,89.37682339199968,False,339 days,Industrial
+1,102,2023-10-02,Plastic,83.12761633788078,True,100 days,Personal
+2,103,2023-10-03,Steel,96.7531900234624,False,178 days,Industrial
+3,104,2023-10-04,Aluminum,98.90988281503088,True,244 days,Personal
+4,105,2023-10-05,Plastic,81.50324556477334,False,286 days,Personal
+5,106,2023-10-06,Plastic,93.75175114247996,False,148 days,Industrial
+6,107,2023-10-07,Plastic,85.86684759258713,True,148 days,Personal
+7,108,2023-10-08,Plastic,87.04133683281796,False,289 days,Industrial
+8,109,2023-10-09,Steel,97.76789914877985,False,266 days,Industrial
+9,110,2023-10-10,Plastic,72.13108174593661,True,186 days,Industrial
