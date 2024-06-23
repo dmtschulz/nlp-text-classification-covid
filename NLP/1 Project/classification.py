@@ -110,11 +110,11 @@ def prepare_train_test_split(data, m, test_size=0.2, stratify_col='category', ra
     """Prepare train and test sets."""
     df = pd.DataFrame(data)
     if m == "nb":
-        X = df[['preprocessed_text']]  # Features
+        X = df[['preprocessed_text']] # Features
     else:
-        X = df['preprocessed_text']  # Features
+        X = df['preprocessed_text'] # Features
 
-    y = df[stratify_col]           # Target variable
+    y = df[stratify_col] # Target variable
     X_train, X_test, y_train, y_test = train_test_split(X, y,
                                                         test_size=test_size, stratify=y,
                                                         random_state=random_state)
