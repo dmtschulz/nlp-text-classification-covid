@@ -7,6 +7,7 @@ from sklearn.utils import resample
 
 import torch
 
+
 # Function to train Naïve Bayes Model
 def train_and_evaluate_nb(vectorizer, X_train, X_test, y_train, y_test, filename, vectorizer_name):
     # Vectorize the data
@@ -39,12 +40,15 @@ def train_and_evaluate_nb(vectorizer, X_train, X_test, y_train, y_test, filename
             'File': filename
         })
     
-
     print(f"Vectorizer: {vectorizer_name}\n")
     # Print classification report
-    print("\nClassification Report:")
+    #print("\nClassification Report:")
     classification_report_dict = classification_report(y_test, y_pred, output_dict=True)
-    print(classification_report(y_test, y_pred))
+    #print(classification_report(y_test, y_pred))
+    
+    # Extract and print F1 score
+    f1 = f1_score(y_test, y_pred, average='weighted')
+    print(f"F1 Score (weighted): {f1:.4f}")
     
     # Count misclassifications
     misclassified_count = misclassified_indices.sum()
@@ -53,6 +57,7 @@ def train_and_evaluate_nb(vectorizer, X_train, X_test, y_train, y_test, filename
     print(50*"*")
     
     return classification_report_dict, misclassified_data, misclassified_count, total_examples
+
 
 
 # Function for training and evaluating FFNN model
@@ -84,9 +89,9 @@ def train_and_evaluate_ffnn(model, train_loader, test_loader, criterion, optimiz
 
     predictions = [1 if p > 0.5 else 0 for p in predictions]
 
-    f1 = f1_score(y_pred=predictions, y_true=true_labels)
+    f1 = f1_score(y_pred=predictions, y_true=true_labels, average='weighted')
     print(f"F1 Score: {f1:.4f}")
-    print(classification_report(true_labels, predictions))
+    #print(classification_report(true_labels, predictions))
 
     # Count misclassified examples
     misclassified_count = sum([1 for true, pred in zip(true_labels, predictions) if true != pred])
