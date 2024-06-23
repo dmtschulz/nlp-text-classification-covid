@@ -6,7 +6,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.utils import resample
 
 import torch
-from tqdm import tqdm
 
 # Function to train Naïve Bayes Model
 def train_and_evaluate_nb(vectorizer, X_train, X_test, y_train, y_test, filename, vectorizer_name):
@@ -57,41 +56,44 @@ def train_and_evaluate_nb(vectorizer, X_train, X_test, y_train, y_test, filename
 
 
 # Function for training and evaluating FFNN model
-def train_and_evaluate_ffnn(model, train_loader, test_loader, criterion, optimizer, device):
-    # Training
-    model.to(device).train()
-    for inputs, labels in tqdm(train_loader, desc="Training"):
-        inputs, labels = inputs.to(device), labels.to(device)
-        optimizer.zero_grad()
-        outputs = model(inputs)
-        loss = criterion(outputs, labels.unsqueeze(1))
-        loss.backward()
-        optimizer.step()
-    
+def train_and_evaluate_ffnn(model, train_loader, test_loader, criterion, optimizer, device, epochs=50):
+    train_losses = []
+    for epoch in range(epochs):
+        model.train()
+        epoch_loss = 0.0
+        for inputs, labels in train_loader:
+            inputs, labels = inputs.to(device), labels.to(device)
+            optimizer.zero_grad()
+            outputs = model(inputs)
+            loss = criterion(outputs, labels.unsqueeze(1))
+            loss.backward()
+            optimizer.step()
+            epoch_loss += loss.item()
+        train_losses.append(epoch_loss / len(train_loader))
+
     # Evaluation
-    model.to(device).eval()
+    model.eval()
     predictions = []
     true_labels = []
     with torch.no_grad():
-        for inputs, labels in tqdm(test_loader, desc="Evaluating"):
+        for inputs, labels in test_loader:
             inputs, labels = inputs.to(device), labels.to(device)
             outputs = model(inputs)
-            predictions.extend(outputs.squeeze().cpu().detach().numpy())
-            true_labels.extend(labels.cpu().detach().numpy())
-    
-    predictions = [1 if p >= 0.5 else 0 for p in predictions]
-    
+            predictions.extend(outputs.squeeze().cpu().numpy().tolist())
+            true_labels.extend(labels.cpu().numpy().tolist())
+
+    predictions = [1 if p > 0.5 else 0 for p in predictions]
 
     f1 = f1_score(y_pred=predictions, y_true=true_labels)
-    print(f"F1: {f1}")
-    # Classification report
+    print(f"F1 Score: {f1:.4f}")
     print(classification_report(true_labels, predictions))
+
     # Count misclassified examples
     misclassified_count = sum([1 for true, pred in zip(true_labels, predictions) if true != pred])
     total_examples = len(true_labels)
-    
-    print(f"\nNumber of misclassified examples out of {total_examples} examples : {misclassified_count}")
-    print(50*"*")
+    print(f"\nNumber of misclassified examples out of {total_examples} examples: {misclassified_count}")
+
+
 
 
 def load_json_data(file_path):

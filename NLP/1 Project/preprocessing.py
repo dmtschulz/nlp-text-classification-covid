@@ -10,7 +10,7 @@ def preprocess_with_stopwords_with_lemmatization(text):
     # Lowercase
     text = text.lower()
     # Replace "5G" or "5 G" with "5 G"
-    text = re.sub(r'\b(5\s?)g\b', '5 g', text)
+    text = re.sub(r'\b(5\s?)g\b', '5g', text)
     # Strip white space
     text = text.strip()
     # Remove spaces between specific punctuation marks
@@ -38,7 +38,7 @@ def preprocess_without_stopwords_with_lemmatization(text):
     # Lowercase
     text = text.lower()    
     # Replace "5G" or "5 G" with "5 G"
-    text = re.sub(r'\b(5\s?)g\b', '5 g', text)
+    text = re.sub(r'\b(5\s?)g\b', '5g', text)
     # Strip white space
     text = text.strip()
     # Remove spaces between specific punctuation marks
@@ -68,7 +68,7 @@ def preprocess_with_stopwords_without_lemmatization(text):
     # Lowercase
     text = text.lower()    
     # Replace "5G" or "5 G" with "5 G"
-    text = re.sub(r'\b(5\s?)g\b', '5 g', text)
+    text = re.sub(r'\b(5\s?)g\b', '5g', text)
     # Strip white space
     text = text.strip() 
     # Remove spaces between specific punctuation marks
@@ -92,7 +92,7 @@ def preprocess_without_stopwords_without_lemmatization(text):
     # Lowercase
     text = text.lower()    
     # Replace "5G" or "5 G" with "5 G"
-    text = re.sub(r'\b(5\s?)g\b', '5 g', text)
+    text = re.sub(r'\b(5\s?)g\b', '5g', text)
     # Strip white space
     text = text.strip()
     # Remove spaces between specific punctuation marks
