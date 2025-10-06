@@ -4,5 +4,7 @@ This project focuses on oppositional thinking analysis through text classificati
 
 Key Highlights:
 
-Models / Neural Network Architecture Constructed: Naïve Bayes, Feedforward Neural Network
-Tools: PyTorch, Pandas, Scikit-learn, Jupyter Notebook
+- Models / Neural Network Architecture Constructed: Naïve Bayes, Feedforward Neural Network
+- Tools: PyTorch, Pandas, Scikit-learn, Jupyter Notebook
+
+Note: No performance scores are provided as the objective was to construct the models. Achieving higher accuracy would require additional computational resources.
